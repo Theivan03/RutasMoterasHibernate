@@ -18,4 +18,7 @@ public interface IRutaRepository extends CrudRepository<Ruta, Long> {
     @Query("select r from Ruta r where r.TipoMoto like ?1")
     List<Ruta> findRutaByTipoMoto(String id);
 
+    @Query("select r from Ruta r ORDER BY r.fecha_creacion DESC")
+    List<Ruta> findRutaByFecha();
+
 }

@@ -49,5 +49,10 @@ public class RutaService implements IRutaService{
         return rutaRepository.findRutaByComunidadAutonoma(id);
     }
 
+    @Override
+    public List<Ruta> findRutaByFecha() {
+        return rutaRepository.findRutaByFecha();
+    }
+
 
 }

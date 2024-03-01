@@ -12,5 +12,6 @@ public interface IRutaService {
     Ruta update(Long id, Ruta ruta) throws Exception;
     List<Ruta> filtrarPorTipoMoto(String id);
     List<Ruta> filtrarPorComunidad(String id);
+    List<Ruta> findRutaByFecha();
 
 }

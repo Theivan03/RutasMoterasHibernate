@@ -21,13 +21,13 @@ public class Ruta {
     @Column(nullable = false)
     private Long id;
 
-    @Column(nullable = false, length = 15)
+    @Column(nullable = false, length = 20)
     private String titulo;
 
     @Column
     private Date fecha_creacion;
 
-    @Column(nullable = false, length = 15)
+    @Column(nullable = false, length = 250)
     private String descripcion;
 
     @Column(nullable = false, length = 20)
@@ -35,5 +35,11 @@ public class Ruta {
 
     @Column(nullable = false, length = 20)
     private String TipoMoto;
+
+    @Column(nullable = false)
+    private Long userId;
+
+    @Column
+    private String imageURL;
 
 }

@@ -2,7 +2,9 @@ package com.example.RutasMoteras.controllers;
 
 import com.example.RutasMoteras.exceptions.Response;
 import com.example.RutasMoteras.model.entity.Ruta;
+import com.example.RutasMoteras.model.entity.User;
 import com.example.RutasMoteras.model.service.Ruta.IRutaService;
+import com.example.RutasMoteras.model.service.User.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -28,6 +30,9 @@ public class RutasMoterasController {
 
     @Autowired
     private IRutaService rutaService;
+
+    @Autowired
+    private IUserService userService;
 
     private final Logger logger = LoggerFactory.getLogger(RutasMoterasController.class);
 
@@ -137,7 +142,7 @@ public class RutasMoterasController {
         return new ResponseEntity<>(rutaService.filtrarPorTipoMoto(id), HttpStatus.OK);
     }
 
-    @Operation(summary = "Método que devuelve todas las rutas filñtrando por comunidad")
+    @Operation(summary = "Método que devuelve todas las rutas filtrando por comunidad")
     @ApiResponses(value = {
             @ApiResponse(   responseCode = "200", description = "Rutas devuentas",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = Ruta.class)))),
@@ -148,6 +153,32 @@ public class RutasMoterasController {
     public ResponseEntity<List<Ruta>> GetAllRutasFiltradoComuinidad(@PathVariable String id)
     {
         return new ResponseEntity<>(rutaService.filtrarPorComunidad(id), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Método que devuelve todas las rutas filtrando por fecha más reciente")
+    @ApiResponses(value = {
+            @ApiResponse(   responseCode = "200", description = "Rutas devuentas",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Ruta.class)))),
+            @ApiResponse(   responseCode = "404", description = "Rutas no devuentas",
+                    content = @Content(schema =  @Schema(implementation = Response.class)))
+    })
+    @GetMapping("/rutasF")
+    public ResponseEntity<List<Ruta>> GetAllRutasFiltradoFecha()
+    {
+        return new ResponseEntity<>(rutaService.findRutaByFecha(), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Método que devuelve todas las rutas filtrando por email")
+    @ApiResponses(value = {
+            @ApiResponse(   responseCode = "200", description = "Rutas devuentas",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Ruta.class)))),
+            @ApiResponse(   responseCode = "404", description = "Rutas no devuentas",
+                    content = @Content(schema =  @Schema(implementation = Response.class)))
+    })
+    @GetMapping("/usuario/{email}")
+    public ResponseEntity<User> GetUserByEmail(@PathVariable String email)
+    {
+        return new ResponseEntity<User>(userService.findByEmail(email), HttpStatus.OK);
     }
 
 

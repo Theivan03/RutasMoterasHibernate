@@ -47,7 +47,6 @@ public class AuthenticationService implements IAuthenticationService
                 )
         );
 
-        return userRepository.findByEmail(user.getEmail())
-                .orElseThrow();
+        return userRepository.findByEmail(user.getEmail());
     }
 }

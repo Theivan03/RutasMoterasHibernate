@@ -12,7 +12,7 @@ public interface IUserService
     List<User> findAll();
     Optional<User> findByUsername(String username);
 
-    Optional<User> findByEmail(String email);
+    User findByEmail(String email);
 
     Optional<User> findById(Long id);
     List<User> findByCity(String city);
