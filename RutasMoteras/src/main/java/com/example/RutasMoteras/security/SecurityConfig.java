@@ -86,7 +86,7 @@ public class SecurityConfig
                         auth.dispatcherTypeMatchers(FORWARD, ERROR).permitAll()
                                 .requestMatchers("/auth/**").permitAll()
                                 //.requestMatchers(HttpMethod.GET, "/api/rutas").hasAnyRole(ERole.USER.name(), ERole.GUEST.name(), ERole.ADMIN.name())
-
+                                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
 
                                 //.requestMatchers(HttpMethod.POST, "/api/books/**").hasAnyRole(ERole.GUEST.name(), ERole.USER.name())
                                 .anyRequest().authenticated()

@@ -13,25 +13,11 @@ public class RegisterUserDTO
 {
     private String password;
 
-    private String nif;
-
     private String name;
 
     private String surname;
 
     private String email;
-
-    private String address;
-
-    private String city;
-
-    private String postalCode;
-
-    private String province;
-
-    private String country;
-
-    private String image;
 
     private List<Long> rolIds;
 }
