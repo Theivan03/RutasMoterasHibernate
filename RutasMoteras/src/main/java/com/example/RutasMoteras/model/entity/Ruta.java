@@ -30,16 +30,16 @@ public class Ruta {
     @Column(nullable = false, length = 250)
     private String descripcion;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 20, name = "comunidad_autonoma")
     private String ComunidadAutonoma;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 20, name = "tipo_moto")
     private String TipoMoto;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "user_id")
     private Long userId;
 
-    @Column
+    @Column(name = "imageurl")
     private String imageURL;
 
 }

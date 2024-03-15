@@ -1,6 +1,7 @@
 package com.example.RutasMoteras.controllers;
 
 import com.example.RutasMoteras.exceptions.Response;
+import com.example.RutasMoteras.mappers.UserMapper;
 import com.example.RutasMoteras.model.entity.Ruta;
 import com.example.RutasMoteras.model.entity.User;
 import com.example.RutasMoteras.model.service.Ruta.IRutaService;
@@ -33,6 +34,9 @@ public class RutasMoterasController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private UserMapper userMapper;
 
     private final Logger logger = LoggerFactory.getLogger(RutasMoterasController.class);
 
@@ -180,6 +184,33 @@ public class RutasMoterasController {
     {
         return new ResponseEntity<User>(userService.findByEmail(email), HttpStatus.OK);
     }
+
+    @Operation(summary = "Método que devuelve el usuario buscado por id")
+    @ApiResponses(value = {
+            @ApiResponse(   responseCode = "200", description = "Rutas devuentas",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Ruta.class)))),
+            @ApiResponse(   responseCode = "404", description = "Rutas no devuentas",
+                    content = @Content(schema =  @Schema(implementation = Response.class)))
+    })
+    @GetMapping("/usuarioI/{id}")
+    public ResponseEntity<User> GetUserById(@PathVariable Long id)
+    {
+        return new ResponseEntity<User>(userService.findById(id), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Método que devuelve todas las rutas filtrando por usuario")
+    @ApiResponses(value = {
+            @ApiResponse(   responseCode = "200", description = "Rutas devuentas",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Ruta.class)))),
+            @ApiResponse(   responseCode = "404", description = "Rutas no devuentas",
+                    content = @Content(schema =  @Schema(implementation = Response.class)))
+    })
+    @GetMapping("/rutasU/{id}")
+    public ResponseEntity<List<Ruta>> GetAllRutasUser(@PathVariable Long id)
+    {
+        return new ResponseEntity<>(rutaService.findRutaByUser(id), HttpStatus.OK);
+    }
+
 
 
 }

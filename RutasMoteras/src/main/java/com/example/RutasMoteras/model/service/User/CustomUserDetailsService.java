@@ -22,7 +22,6 @@ public class CustomUserDetailsService implements UserDetailsService
     }
 
     public UserDetails loadUserById(Long userId) {
-        return usuarioService.findById(userId)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuario con id: " + userId + " no encontrado"));
+        return usuarioService.findById(userId);
     }
 }

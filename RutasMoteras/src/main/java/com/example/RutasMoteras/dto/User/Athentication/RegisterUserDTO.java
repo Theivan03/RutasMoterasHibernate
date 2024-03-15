@@ -19,5 +19,7 @@ public class RegisterUserDTO
 
     private String email;
 
+    private String image;
+
     private List<Long> rolIds;
 }

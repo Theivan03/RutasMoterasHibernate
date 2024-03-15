@@ -21,4 +21,7 @@ public interface IRutaRepository extends CrudRepository<Ruta, Long> {
     @Query("select r from Ruta r ORDER BY r.fecha_creacion DESC")
     List<Ruta> findRutaByFecha();
 
+    @Query("select r from Ruta r where r.userId = ?1")
+    List<Ruta> findRutaByUser(Long id);
+
 }

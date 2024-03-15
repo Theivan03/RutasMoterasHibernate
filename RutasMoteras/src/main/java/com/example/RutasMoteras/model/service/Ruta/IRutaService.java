@@ -14,4 +14,6 @@ public interface IRutaService {
     List<Ruta> filtrarPorComunidad(String id);
     List<Ruta> findRutaByFecha();
 
+    List<Ruta> findRutaByUser(Long id);
+
 }

@@ -14,7 +14,7 @@ public interface IUserService
 
     User findByEmail(String email);
 
-    Optional<User> findById(Long id);
+    User findById(Long id);
     List<User> findByCity(String city);
 
     User addUser(User user, List<Long> rolIds);

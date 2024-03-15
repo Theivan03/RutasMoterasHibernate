@@ -32,9 +32,6 @@ public class User implements UserDetails
     private String password;
 
     @Column
-    private String nif;
-
-    @Column
     private String name;
 
     @Column
@@ -44,34 +41,16 @@ public class User implements UserDetails
     private String email;
 
     @Column
-    private String address;
-
-    @Column
     private String city;
 
     @Column(name = "postal_code")
     private String postalCode;
 
     @Column
-    private String province;
-
-    @Column
-    private String country;
-
-    @Column
     private String image;
 
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
-
-    @Column(name = "last_login")
-    private LocalDateTime lastLogin;
-
-    @Column(name = "active")
-    private boolean active = true;
-
-    @Transient
-    private int age;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",

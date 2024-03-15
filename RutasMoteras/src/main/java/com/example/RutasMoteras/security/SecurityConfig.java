@@ -26,6 +26,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
@@ -76,6 +78,7 @@ public class SecurityConfig
         return authProvider;
     }
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -85,9 +88,13 @@ public class SecurityConfig
                 .authorizeHttpRequests(auth ->
                         auth.dispatcherTypeMatchers(FORWARD, ERROR).permitAll()
                                 .requestMatchers("/auth/**").permitAll()
-                                //.requestMatchers(HttpMethod.GET, "/api/rutas").hasAnyRole(ERole.USER.name(), ERole.GUEST.name(), ERole.ADMIN.name())
+                                .requestMatchers("/api/rutas").permitAll()
+                                .requestMatchers("/api/rutasU/**").permitAll()
+                                .requestMatchers("/api/rutasC/**").permitAll()
+                                .requestMatchers("/api/rutasT/**").permitAll()
+                                .requestMatchers("/api/rutasF").permitAll()
+                                .requestMatchers("/api/usuarioI/**").permitAll()
                                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-
                                 //.requestMatchers(HttpMethod.POST, "/api/books/**").hasAnyRole(ERole.GUEST.name(), ERole.USER.name())
                                 .anyRequest().authenticated()
                 );
