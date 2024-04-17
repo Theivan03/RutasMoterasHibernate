@@ -2,6 +2,7 @@ package com.example.RutasMoteras.model.service.User;
 
 
 import com.example.RutasMoteras.model.entity.Role;
+import com.example.RutasMoteras.model.entity.Ruta;
 import com.example.RutasMoteras.model.entity.User;
 import com.example.RutasMoteras.model.repository.IRoleRepository;
 import com.example.RutasMoteras.model.repository.IUserRepository;
@@ -59,6 +60,16 @@ public class UserService implements IUserService
 
         user.setRoles((List<Role>)roleRepository.findAllById(rolIds));
 
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User update(Long id, User user) throws Exception {
+        User ruta1 = userRepository.findById(id).orElseThrow(() -> new Exception("Error al actuelizar cocheMatricula: " + id));
+        user.setId(ruta1.getId());
+
+        List<Role> role = userRepository.rolesUser(ruta1.getId());
+        user.setRoles(role);
         return userRepository.save(user);
     }
 }

@@ -19,4 +19,5 @@ public interface IUserService
 
     User addUser(User user, List<Long> rolIds);
     void remove(User user);
+    User update(Long id, User user) throws Exception;
 }

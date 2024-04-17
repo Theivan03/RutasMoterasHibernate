@@ -111,25 +111,25 @@ public class RutasMoterasController {
     }
 
     @Operation(summary = "Método que actualiza una ruta")
-    @PutMapping("/ruta/{id}")
-    public ResponseEntity<?> updateRuta(@PathVariable Long id, @Valid @RequestBody Ruta newRuta){
+        @PutMapping("/ruta/{id}")
+        public ResponseEntity<?> updateRuta(@PathVariable Long id, @Valid @RequestBody Ruta newRuta){
 
-        Ruta ruta = null;
-        Map<String, Object> errores = new HashMap<String, Object>();
+            Ruta ruta = null;
+            Map<String, Object> errores = new HashMap<String, Object>();
 
-        try{
+            try{
 
-            ruta = rutaService.update(id, newRuta);
+                ruta = rutaService.update(id, newRuta);
 
-        }catch (Exception ex){
+            }catch (Exception ex){
 
-            errores.put("Mensaje", "Error al obtener la ruta");
-            errores.put("Mensaje", ex.getMessage());
-            return new ResponseEntity<>(errores, HttpStatus.INTERNAL_SERVER_ERROR);
+                errores.put("Mensaje", "Error al obtener la ruta");
+                errores.put("Mensaje", ex.getMessage());
+                return new ResponseEntity<>(errores, HttpStatus.INTERNAL_SERVER_ERROR);
 
-        }
+            }
 
-        return new ResponseEntity<>(ruta, HttpStatus.OK);
+            return new ResponseEntity<>(ruta, HttpStatus.OK);
     }
 
 

@@ -39,7 +39,7 @@ public class Ruta {
     @Column(nullable = false, name = "user_id")
     private Long userId;
 
-    @Column(name = "imageurl")
+    @Column(name = "imageurl", length = 102400)
     private String imageURL;
 
 }
