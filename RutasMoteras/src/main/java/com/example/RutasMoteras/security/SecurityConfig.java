@@ -89,6 +89,7 @@ public class SecurityConfig
                         auth.dispatcherTypeMatchers(FORWARD, ERROR).permitAll()
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/api/rutas").permitAll()
+                                .requestMatchers("/api/ruta/**").permitAll()
                                 .requestMatchers("/api/rutasU/**").permitAll()
                                 .requestMatchers("/api/rutasC/**").permitAll()
                                 .requestMatchers("/api/rutasT/**").permitAll()
