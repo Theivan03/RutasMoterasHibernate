@@ -21,4 +21,8 @@ public interface IUserRepository extends CrudRepository<User, Long>
 
     @Query("select u.roles from user u inner join u.roles where u.id = ?1")
     List<Role> rolesUser(long idUsuario);
+
+
+
+
 }

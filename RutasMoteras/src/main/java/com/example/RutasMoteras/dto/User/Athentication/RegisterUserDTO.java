@@ -22,4 +22,8 @@ public class RegisterUserDTO
     private String image;
 
     private List<Long> rolIds;
+
+    private String city;
+
+    private String postalCode;
 }

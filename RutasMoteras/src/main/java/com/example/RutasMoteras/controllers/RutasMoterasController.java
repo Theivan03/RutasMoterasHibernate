@@ -2,6 +2,7 @@ package com.example.RutasMoteras.controllers;
 
 import com.example.RutasMoteras.exceptions.Response;
 import com.example.RutasMoteras.mappers.UserMapper;
+import com.example.RutasMoteras.model.entity.Role;
 import com.example.RutasMoteras.model.entity.Ruta;
 import com.example.RutasMoteras.model.entity.User;
 import com.example.RutasMoteras.model.service.Ruta.IRutaService;
@@ -211,6 +212,53 @@ public class RutasMoterasController {
         return new ResponseEntity<>(rutaService.findRutaByUser(id), HttpStatus.OK);
     }
 
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<Response> deleteUser(@PathVariable Long id)
+    {
+        Map<String, String> errores = new HashMap<>();
 
+        try
+        {
+            userService.remove(id);
+
+            logger.info("Usuario borrado correctamente: " + id);
+        }
+        catch (Exception ex)
+        {
+            logger.error("Error al borrar el usuario con el id: " + id, ex);
+
+            errores.put("mensaje", "Error al borrar el usuario con el id: " + id + ex);
+
+            return new ResponseEntity<>(Response.generalError(errores), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>(Response.noErrorResponse("Ruta borrada correctamente"), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Método que devuelve todas los usuarios")
+    @ApiResponses(value = {
+            @ApiResponse(   responseCode = "200", description = "Usuairos devuentos",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Ruta.class)))),
+            @ApiResponse(   responseCode = "404", description = "Usuairos no devuentos",
+                    content = @Content(schema =  @Schema(implementation = Response.class)))
+    })
+    @GetMapping("/allUser")
+    public ResponseEntity<List<User>> GetAllUsers()
+    {
+        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Método que devuelve todas los usuarios")
+    @ApiResponses(value = {
+            @ApiResponse(   responseCode = "200", description = "Usuairos devuentos",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Ruta.class)))),
+            @ApiResponse(   responseCode = "404", description = "Usuairos no devuentos",
+                    content = @Content(schema =  @Schema(implementation = Response.class)))
+    })
+    @GetMapping("/roleUser/{id}")
+    public ResponseEntity<List<Role>> GetRoleForUser(@PathVariable Long id)
+    {
+        return new ResponseEntity<>(userService.getRol(id), HttpStatus.OK);
+    }
 
 }

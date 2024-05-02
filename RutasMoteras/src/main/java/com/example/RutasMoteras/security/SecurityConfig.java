@@ -88,6 +88,7 @@ public class SecurityConfig
                 .authorizeHttpRequests(auth ->
                         auth.dispatcherTypeMatchers(FORWARD, ERROR).permitAll()
                                 .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/api/user/**").permitAll()
                                 .requestMatchers("/api/rutas").permitAll()
                                 .requestMatchers("/api/ruta/**").permitAll()
                                 .requestMatchers("/api/rutasU/**").permitAll()

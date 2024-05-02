@@ -23,13 +23,14 @@ public class UserService implements IUserService
     private IRoleRepository roleRepository;
 
     @Override
-    public void remove(User user) {
-        userRepository.delete(user);
+    public void remove(Long userid) {
+
+        userRepository.deleteById(userid);
     }
 
     @Override
     public List<User> findAll() {
-        return null;
+        return (List<User>) userRepository.findAll();
     }
 
     @Override
@@ -65,11 +66,17 @@ public class UserService implements IUserService
 
     @Override
     public User update(Long id, User user) throws Exception {
-        User ruta1 = userRepository.findById(id).orElseThrow(() -> new Exception("Error al actuelizar cocheMatricula: " + id));
-        user.setId(ruta1.getId());
+        User userAntiguo = userRepository.findById(id).orElseThrow(() -> new Exception("Error al autenticar el usuario: " + id));
+        user.setId(userAntiguo.getId());
+        user.setCreationDate((userAntiguo.getCreationDate()));
 
-        List<Role> role = userRepository.rolesUser(ruta1.getId());
+        List<Role> role = userRepository.rolesUser(userAntiguo.getId());
         user.setRoles(role);
         return userRepository.save(user);
+    }
+
+    @Override
+    public List<Role> getRol(Long id) {
+        return userRepository.rolesUser(id);
     }
 }
