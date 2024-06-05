@@ -96,8 +96,8 @@ public class SecurityConfig
                                 .requestMatchers("/api/rutasT/**").permitAll()
                                 .requestMatchers("/api/rutasF").permitAll()
                                 .requestMatchers("/api/usuarioI/**").permitAll()
+                                .requestMatchers("/api/usuario/**").permitAll()
                                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                                //.requestMatchers(HttpMethod.POST, "/api/books/**").hasAnyRole(ERole.GUEST.name(), ERole.USER.name())
                                 .anyRequest().authenticated()
                 );
 
